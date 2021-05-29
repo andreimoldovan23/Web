@@ -1,0 +1,44 @@
+<div *ngIf="student" class="head">
+    <div id="topBar">
+        <div class="container" id="infoContainer">
+            <div class="title"><span class="title">Student</span></div>
+            <span class="info" id="name">{{student.name}}</span>
+            <span class="info" id="mail">{{student.mail}}</span>
+            <span class="info" id="group">{{student.groupNo}}</span>
+        </div>
+        <div class="container" id="menuContainer">
+            <div class="title"><button class="title" id="logout" (click)="logOut()">LogOut</button></div>
+        </div>
+    </div>
+
+    <h1>Grades
+        <div>
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+    </h1>
+    <div *ngIf="dataSource.data" class="gradesTable">
+        <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <ng-container matColumnDef="courseName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Course name </mat-header-cell>
+                <mat-cell *matCellDef="let gradeType"> {{gradeType.courseName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="courseGrade">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Grade </mat-header-cell>
+                <mat-cell *matCellDef="let gradeType"> {{gradeType.grade}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="courseType">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Course type </mat-header-cell>
+                <mat-cell *matCellDef="let gradeType"> {{gradeType.type}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
+    </div>
+</div>

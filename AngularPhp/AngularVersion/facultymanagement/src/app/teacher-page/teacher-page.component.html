@@ -1,0 +1,56 @@
+<div *ngIf="teacher" class="head">
+    <div id="topBar">
+        <div class="container" id="infoContainer">
+            <div class="title"><span class="title">Teacher</span></div>
+            <span class="info" id="name">{{teacher.name}}</span>
+            <span class="info" id="mail">{{teacher.mail}}</span>
+            <span class="info" id="site">{{teacher.site}}</span>
+            <span class="info" id="rank">{{teacher.rank}}</span>
+        </div>
+        <div class="container" id="menuContainer">
+            <div class="title"><button class="title" id="logout" (click)="logOut()">LogOut</button></div>
+        </div>
+    </div>
+
+    <nav *ngIf="groups">
+        <a *ngFor="let g of groups" (click)="select(g)" [class.selected]="selectedGroup == g">{{g}}  </a>
+    </nav>
+
+    <div *ngIf="selectedGroup" id="tableContents">
+        <h1>Students
+            <div>
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+        </h1>
+        <div class="studentsTable">
+            <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+                <ng-container matColumnDef="studentName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Student name </mat-header-cell>
+                    <mat-cell *matCellDef="let studentCourse"> <a>{{studentCourse.studentName}}</a> </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="course">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Course </mat-header-cell>
+                    <mat-cell *matCellDef="let studentCourse"> {{studentCourse.course}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="sid">
+                    <mat-header-cell *matHeaderCellDef [hidden]="true"></mat-header-cell>
+                    <mat-cell *matCellDef="let studentCourse" [hidden]="true"> {{studentCourse.sid}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="cid">
+                    <mat-header-cell *matHeaderCellDef [hidden]="true"></mat-header-cell>
+                    <mat-cell *matCellDef="let studentCourse" [hidden]="true"> {{studentCourse.cid}} </mat-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleRow(row)"></mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[4,]"></mat-paginator>
+        </div>
+    </div>
+</div>

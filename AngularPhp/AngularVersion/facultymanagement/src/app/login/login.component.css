@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom, aqua, whitesmoke);
+}
+
+#title {
+    width: auto;
+    font: bold 18px/30px, Georgia, serif;
+    text-decoration: underline;
+}

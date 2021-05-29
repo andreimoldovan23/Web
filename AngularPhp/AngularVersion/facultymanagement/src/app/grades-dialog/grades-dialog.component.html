@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Grades</h1>
+<button id="closeButton" mat-button mat-dialog-close (click)="close()">X</button>
+<div mat-dialog-content>
+    <ul *ngIf="studentGrades">
+        <li>
+            <input type="number" name="addGrade" [(ngModel)]="enrolmentDetails.grade" [ngModelOptions]="{standalone: true}">
+            <button (click)="addStudentGrade()">Add</button>
+        </li>
+        <li *ngFor="let g of studentGrades">
+            <input type="number" name="updateGrade" [(ngModel)]="g.grade" [ngModelOptions]="{standalone: true}" (keyup)="select(g)">
+            <button (click)="updateStudentGrade()">Update</button>
+        </li>
+    </ul>
+</div>
