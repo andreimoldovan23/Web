@@ -1,0 +1,111 @@
+#topBar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+    align-items: center;
+    justify-items: center;
+    height: 30px;
+    width: 100%;
+    min-width: 600px;
+    padding: auto;
+    margin: auto;
+    border: auto;
+    background-color: black;
+    position: relative;
+    left: 0%;
+    top: 0%;
+}
+
+.container {
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: start;
+    align-items: center;
+    justify-items: center;
+}
+
+#topicsContainer {
+    width: 70%;
+}
+
+#menuContainer {
+    width: 25%;
+}
+
+@media only screen and (max-width: 1200px) {
+    [class*="topics"] {
+        width: 0%;
+        visibility: hidden;
+    }
+}
+
+.topics {
+    text-align: center;
+    width: 7%;
+    height: 100%;
+    padding: 1px;
+    border: 1px 2px;
+    margin: 1px;
+    box-sizing: border-box;
+    font: bold 12px/30px Georgia, serif;
+    color: whitesmoke;
+}
+
+.menuTopics {
+    width: 15%;
+}
+
+.end {
+    text-align: end;
+}
+
+.cnn > div {
+    width: 10%;
+    height: 100%;
+    position: relative;
+}
+
+.cnn > span {
+    left: 0px;
+    top: 35%;
+    width: 50%;
+    height: 100%;
+    font: bold 18px/30px Georgia, serif;
+    color: whitesmoke;
+    background-color: red;
+}
+
+#arrow {
+    text-align: left;
+    width: 6%;
+    height: 100%;
+    padding: 1px 2px;
+    border: 1px;
+    margin: 1px 2px;
+    box-sizing: border-box;
+    font: bold 18px/30px Georgia, serif;
+    transform: rotate(90deg);
+    color: whitesmoke;
+}
+
+.draw {
+    text-align: center;
+    width: 15%;
+    height: 100%;
+    padding: 1px 8px;
+    border: 1px 8px;
+}
+
+.burgermenu div {
+    width: 50%;
+    height: 5px;
+    background-color: white;
+    margin: 4px 0;
+}
+
+.burgermenu {
+    width: 15%;
+    height: 100%;
+    padding: 1px 8px;
+    border: 1px 8px;
+}

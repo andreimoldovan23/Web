@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/topBarStyle.css">
+        <link rel="stylesheet" href="css/teacher_page.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="js/teacher_page.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id="topBar">
+                <div class="container" id="infoContainer">
+                    <div class="title"><span class="title">Teacher</span></div>
+                    <span class="info" id="name"></span>
+                    <span class="info" id="mail"></span>
+                    <span class="info" id="site"></span>
+                    <span class="info" id="rank"></span>
+                </div>
+                <div class="container" id="menuContainer">
+                    <div class="title"><button class="title" id="logout">LogOut</button></div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <nav id="groups"></nav>
+            <div>
+                <table id="students">
+                    <tr>
+                        <td>Student</td>
+                        <td>Course</td>
+                        <td class="secret">SId</td>
+                        <td class="secret">CId</td>
+                    </tr>
+                    <tr>
+                        <td><a class="studentName" href="#"></a></td>
+                        <td></td>
+                        <td class="secret"></td>
+                        <td class="secret"></td>
+                    </tr>
+                    <tr>
+                        <td><a class="studentName" href="#"></a></td>
+                        <td></td>
+                        <td class="secret"></td>
+                        <td class="secret"></td>
+                    </tr>
+                    <tr>
+                        <td><a class="studentName" href="#"></a></td>
+                        <td></td>
+                        <td class="secret"></td>
+                        <td class="secret"></td>
+                    </tr>
+                    <tr>
+                        <td><a class="studentName" href="#"></a></td>
+                        <td></td>
+                        <td class="secret"></td>
+                        <td class="secret"></td>
+                    </tr>
+                </table>
+                <button id="goLeft">Previous</button> <br> <br>
+                <button id="goRight">Next</button>
+            </div>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>Grades</p>
+                  <span id="sid" class="secret"></span>
+                  <span id="cid" class="secret"></span>
+                  <ul class="studentGrades">
+                      <li>
+                          <input id="gradeAdd" type="text"><button id="addButton">Add</button>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+        </main>
+        
+    </body>
+</html>

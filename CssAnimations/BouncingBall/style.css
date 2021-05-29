@@ -1,0 +1,21 @@
+@keyframes fall {
+    0% {top: 0px; left: 400px;}
+    100% {top: 200px; left: 400px;}
+}
+
+@keyframes jump {
+    0% {top: 0px;}
+    100% {top: 400px;}
+}
+
+#container {
+    position: relative;
+    top: 0px;
+    left: 400px;
+    animation: fall 1s ease-in 1s 1 normal forwards;
+}
+
+#ball:active {
+    position: relative;
+    animation: jump 3s ease-in infinite alternate both;
+}

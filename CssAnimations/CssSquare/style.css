@@ -1,0 +1,33 @@
+.horizontal {
+    width: 100px;
+    height: 5px;
+    position: relative;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+
+.vertical {
+    width: 5px;
+    height: 100px;
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+
+#h1 {
+    top: 0px;
+    left: 0px;
+}
+
+#v1 {
+    top: -9px;
+    left: -47px;
+}
+
+#h2 {
+    top: -20px;
+    left: 0px;
+}
+
+#v2 {
+    top: -135px;
+    left: 50px;
+}

@@ -1,0 +1,30 @@
+.video-container {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    align-content: space-around;
+    justify-content: flex-start;
+    height: 100%;
+    z-index: 0;
+    position: relative;
+    left: 20%;
+    top: 300px;
+}
+
+.video-container figure {
+    width: 25%;
+    height: 150px;
+    padding: 5px;
+    border: 5px;
+    margin: 5px;
+}
+
+.video-container img {
+    width: 100%;
+    height: 100%;
+}
+
+.video-container figcaption {
+    font: bold, 18px/30px, Georgia, serif;
+    color: black;
+}

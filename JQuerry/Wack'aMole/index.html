@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta lang="en">
+    <meta charset="UTF-8">
+    <meta name="description" title="Wack a mole">
+    <meta name="keywords" content="game">
+    <meta name="author" content="Andrei Moldovan">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="game.js"></script>
+</head>
+
+<body>
+    <h1>Welcome to wack a mole</h1>
+    <button type="button" id="play">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25pt" height="25pt"
+            viewBox="0 0 25 25" version="1.1">
+            <g id="surface1">
+                <path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;"
+                    d="M 12.335938 0 C 5.53125 0 0 5.53125 0 12.335938 C 0 19.140625 5.535156 24.671875 12.335938 24.671875 C 19.140625 24.671875 24.671875 19.136719 24.671875 12.335938 C 24.671875 5.53125 19.140625 0 12.335938 0 Z M 12.335938 22.941406 C 6.488281 22.941406 1.726562 18.183594 1.726562 12.335938 C 1.726562 6.488281 6.488281 1.726562 12.335938 1.726562 C 18.183594 1.726562 22.941406 6.488281 22.941406 12.335938 C 22.941406 18.183594 18.183594 22.941406 12.335938 22.941406 Z M 12.335938 22.941406 " />
+                <path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;"
+                    d="M 18.933594 11.609375 L 10.082031 5.929688 C 9.8125 5.757812 9.472656 5.746094 9.195312 5.898438 C 8.921875 6.050781 8.75 6.339844 8.75 6.652344 L 8.75 18.011719 C 8.75 18.328125 8.921875 18.617188 9.195312 18.765625 C 9.328125 18.835938 9.46875 18.871094 9.613281 18.871094 C 9.773438 18.871094 9.933594 18.828125 10.082031 18.738281 L 18.933594 13.0625 C 19.179688 12.902344 19.332031 12.628906 19.332031 12.335938 C 19.324219 12.042969 19.179688 11.765625 18.933594 11.609375 Z M 10.472656 16.433594 L 10.472656 8.238281 L 16.863281 12.335938 Z M 10.472656 16.433594 " />
+            </g>
+        </svg>
+    </button>
+    <h2>Points: <span id="number-points">0</span></h2>
+    <div>
+        <img src="images.png" width="150px" height="150px">
+    </div>
+    <div id="winMessage">You win</div>
+</body>
+
+</html>

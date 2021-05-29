@@ -1,0 +1,62 @@
+#leftMenu {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    z-index: 10;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: flex-start;
+    background-color: rgb(40,40,40);
+    width: 20%;
+    height: 100%;
+    border-right: black 3px solid;
+}
+
+#leftMenu .container {
+    height: 52px;
+}
+
+hr {
+    width: 100%;
+    border-top: solid 1px black;
+}
+
+#leftMenu > div {
+    border: 4px;
+    margin: 4px;
+}
+
+.burgerMenu div {
+    width: 50%;
+    height: 5px;
+    background-color: white;
+    margin: 4px 0;
+}
+
+.burgerMenu {
+    width: 15%;
+    height: 100%;
+    padding: 1px 8px;
+    border: 1px 8px;
+}
+
+.menuIcons {
+    width: 100%;
+}
+
+.menuIcons > svg {
+    display: inline;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.menuIcons > span {
+    width: 50%;
+    height: 100%;
+    display: inline;
+    float: left;
+    color: white;
+}

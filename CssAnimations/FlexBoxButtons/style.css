@@ -1,0 +1,25 @@
+
+.flex-container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to right, 
+        rgba(24,215,251,0), 
+        rgba(24,215,251,1), 
+        rgba(85,109,140,1),
+        rgba(85,109,140,0));;
+  }
+  
+  .flex-container > div {
+    background-color: #f1f1f1;
+    width: 40%;
+    margin: 5% 2%;
+    border: 5px solid crimson;
+    border-radius: 5%;
+    padding: 5% 2%;
+    text-align: center;
+    font-size: 2em;
+  }

@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    background-image: linear-gradient(to bottom, aqua, whitesmoke);
+}
+
+.form {
+    width: 30%;
+    height: 100px;
+}
+
+#title {
+    width: auto;
+    font: bold 18px/30px, Georgia, serif;
+    text-decoration: underline;
+}
+
+#submitButton {
+    border-radius: 8px;
+    background-color: aqua;
+}

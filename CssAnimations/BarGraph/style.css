@@ -1,0 +1,58 @@
+#Oy {
+    height: 600px;
+    width: 1px;
+    position: relative;
+    top: 0;
+    left: -50%;
+    background-color: black;
+}
+
+#Ox {
+    height: 2px;
+    width: 100%;
+    position:relative;
+    top: 0;
+    left: 0;
+    background-color: black;
+}
+
+.columns {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: baseline;
+    align-content: space-between;
+    align-items: flex-end;
+    width: 80%;
+    height: 600px;
+    background-color: white;
+    position: relative;
+    top: -612px;
+    left: 5%;
+}
+
+#col1 {
+    height: 100px;
+    width: 15%;
+    background-color: blue;
+    padding: 5% 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#col2 {
+    height: 400px;
+    width: 15%;
+    background-color: red;
+    padding: 5% 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#col3 {
+    height: 250px;
+    width: 15%;
+    background-color: green;
+    padding: 5% 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+}

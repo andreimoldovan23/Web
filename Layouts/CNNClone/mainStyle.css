@@ -1,0 +1,82 @@
+body {
+    align-content: center;
+}
+
+header {
+    height: 30px;
+    width: 100%;
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    z-index: 1;
+}
+
+main {
+    width: 80%;
+    align-content: center;
+    position: relative;
+    top: 35px;
+    left: 15%;
+    z-index: 0;
+}
+
+.navItems {
+    text-decoration: none;
+    color: black;
+}
+
+.important {
+    color: red;
+    font: bold;
+}
+
+#contentContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-flow: row wrap;
+    justify-items: center;
+    align-items: flex-start;
+    justify-content: start;
+}
+
+.contentColumnContainer {
+    width: 30%;
+    height: 100%;
+    padding: 3px;
+    margin: 2px;
+    border: 1px;
+    display: inline-flex;
+    flex-flow: column wrap;
+    justify-items: center;
+    align-items: flex-start;
+    justify-content: start;
+}
+
+hr {
+    height: 1px;
+    width: 100%;
+    background-color: black;
+}
+
+.emphasize, .headline {
+    font: bold 14px/30px Georgia, serif;
+    padding: 1px;
+    margin: 0px;
+    border: 1px;
+    color: black;
+}
+
+p, li {
+    font: 12px/30px Georgia, serif;
+    padding: 1px;
+    margin: 0px;
+    border: 1px;
+    color: black;
+}
+
+figure {
+    padding: 0%;
+    margin: 0%;
+    border: 0%;
+}

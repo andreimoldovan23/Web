@@ -1,0 +1,16 @@
+#top {
+    width: 100%;
+    height: 400px;
+    background-image: linear-gradient(to right, rgba(255, 75, 0, 1), rgba(255, 0, 64, 0), rgba(255, 0, 174, 1));
+}
+
+#bottom {
+    width: 100%;
+    height: 400px;
+    background-image: linear-gradient(to right, rgba(0, 214, 174, 1), rgba(0, 107, 174, 0), rgba(0, 0, 174, 1));
+}
+
+hr {
+    width: 100%;
+    height: 1px;
+}

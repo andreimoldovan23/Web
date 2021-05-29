@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta lang="en">
+        <meta charset="UTF-8">
+        <meta name="description" title="Remove hrefs">
+        <meta name="keywords" content="href">
+        <meta name="author" content="Andrei Moldovan">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    </head>
+
+    <body>
+        <div>
+            <ul>
+                <li><a href="http://www.cs.ubbcluj.ro/" target="_blank">I go to cs.ubb</a></li>
+                <li><a href="http://www.cs.ubbcluj.ro/" target="_blank">I also go to cs.ubb</a></li>
+                <li><a href="https://www.youtube.com/" target="_blank">I go to youtube</a></li>
+            </ul>
+            <button onclick="removeCsUbb()">Remove cs_ubb hrefs</button>
+        </div>
+
+        <script type="text/javascript">
+            function removeCsUbb() {
+                Array.from(document.querySelectorAll("a[href='http://www.cs.ubbcluj.ro/']"))
+                    .map(item => item.parentNode)
+                    .forEach(item => item.parentNode.removeChild(item));
+            }
+        </script>
+    </body>
+</html>
