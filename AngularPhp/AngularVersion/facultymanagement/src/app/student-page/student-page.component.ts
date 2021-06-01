@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Student } from '../interfaces/student';
+import { LoginService } from '../services/login.service';
 import { StudentService } from '../services/student.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class StudentPageComponent implements OnInit {
     this.dataSource.paginator = paginate;
   }
 
-  constructor(private service: StudentService, private router: Router) { }
+  constructor(private service: StudentService, private login: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataSource.data = null;
@@ -33,12 +34,12 @@ export class StudentPageComponent implements OnInit {
   }
 
   getStudentDetails() : void {
-    this.service.getDetails(parseInt(localStorage.getItem("userId"), 10))
+    this.service.getDetails()
         .subscribe(rez => this.student = rez);
   }
 
   getStudentGrades() : void {
-    this.service.getStudentGrades(parseInt(localStorage.getItem("userId"), 10))
+    this.service.getStudentGrades()
         .subscribe(rezSet => this.dataSource.data = rezSet);
   }
 
@@ -49,8 +50,8 @@ export class StudentPageComponent implements OnInit {
   }
 
   logOut() : void {
-    localStorage.removeItem("userId");
-    this.router.navigate(['']);
+    this.login.logOut()
+      .subscribe(_ => this.router.navigate(['']));
   }
 
 }

@@ -1,34 +1,46 @@
-<?php
+<?php require("helper.php");  require("corsConfig.php");
 
-$id = $_GET["id"];
+configureCors();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "facultymanagement";
+session_start();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (invalidateSession()) {
+    http_response_code(401);
+} else {
+    renewSession();
 }
 
-$sql = "SELECT name, mail, website, rank FROM teacher where id = ?";
+if (checkIfTeacher()) {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "facultymanagement";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$stmt->bind_result($teacherName, $teacherMail, $teacherSite, $teacherRank);
-$stmt->fetch();
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-$teacher = new StdClass();
-$teacher->name = $teacherName;
-$teacher->mail = $teacherMail;
-$teacher->site = $teacherSite;
-$teacher->rank = $teacherRank;
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-echo json_encode($teacher);
+    $sql = "SELECT name, mail, website, rank FROM teacher where id = ?";
 
-$stmt->close();
-$conn->close();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $_SESSION["id"]);
+    $stmt->execute();
+    $stmt->bind_result($teacherName, $teacherMail, $teacherSite, $teacherRank);
+    $stmt->fetch();
+
+    $teacher = new StdClass();
+    $teacher->name = $teacherName;
+    $teacher->mail = $teacherMail;
+    $teacher->site = $teacherSite;
+    $teacher->rank = $teacherRank;
+
+    echo json_encode($teacher);
+
+    $stmt->close();
+    $conn->close();
+} else {
+    http_response_code(404);
+}
 ?>

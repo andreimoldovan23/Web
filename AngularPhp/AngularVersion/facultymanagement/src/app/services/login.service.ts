@@ -7,16 +7,20 @@ import { Login } from '../interfaces/login';
   providedIn: 'root'
 })
 export class LoginService {
-  private baseUrl : string = `${this.utils.baseUrl}login.php`;
+  private loginUrl : string = `${this.utils.baseUrl}login.php`;
+  private logOutUrl : string = `${this.utils.baseUrl}logout.php`;
 
   constructor(
     private utils: AbstractService
   ) { }
 
-  getLogin(loginDetails: Login) : Observable<number> {
-    const url = `${this.baseUrl}?name=${loginDetails.name}&password=${loginDetails.password}&isTeacher=${loginDetails.isTeacher}`;
-    const errorMessage = `login w/ username=${loginDetails.name}, password=${loginDetails.password}, isTeacher=${loginDetails.isTeacher}`;
-    return this.utils.getOneItem<number>(url, errorMessage);
+  getLogin(loginDetails: Login) : Observable<any> {
+    const url = `${this.loginUrl}?name=${loginDetails.name}&password=${loginDetails.password}&isTeacher=${loginDetails.isTeacher}`;
+    return this.utils.addItem<Login>(loginDetails, url);
+  }
+
+  logOut() : Observable<any> {
+    return this.utils.addItem<any>("", this.logOutUrl);
   }
   
 }

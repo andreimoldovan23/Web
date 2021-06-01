@@ -13,16 +13,12 @@ export class StudentService {
 
   constructor(private utils: AbstractService) { }
 
-  getDetails(id: number) : Observable<Student> {
-    const url = `${this.detailsUrl}?id=${id}`;
-    const errorMessage = `get student details w/ id=${id}`;
-    return this.utils.getOneItem<Student>(url, errorMessage);
+  getDetails() : Observable<Student> {
+    return this.utils.getOneItem<Student>(this.detailsUrl);
   }
 
-  getStudentGrades(id: number) : Observable<GradeType[]> {
-    const url = `${this.gradesUrl}?id=${id}`;
-    const errorMessage = `get student grades w/ id=${id}`;
-    return this.utils.getItems<GradeType>(url, errorMessage);
+  getStudentGrades() : Observable<GradeType[]> {
+    return this.utils.getItems<GradeType>(this.gradesUrl);
   }
   
 }

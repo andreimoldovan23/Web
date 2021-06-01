@@ -4,7 +4,6 @@ $(document).ready(function () {
     $("#goLeft").hide();
     $("#goRight").hide();
 
-    let teacherId = localStorage.getItem("userId");
     let students;
     let current = 0;
 
@@ -12,12 +11,21 @@ $(document).ready(function () {
       dataType: "json",
       type: "GET",
       url: "http://localhost:8081/Homework/FacultyManagement/api/teacher.php",
-      data: {id: teacherId},
+      xhrFields: {
+        withCredentials: true
+      },
       success: function(data) {
           $("#name").text(data.name);
           $("#mail").text(data.mail);
           $("#site").text(data.site);
           $("#rank").text(data.rank);
+      },
+      error: function(jqXhr) {
+        if (jqXhr.status === 401) {
+          window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+        } else {
+          window.location.replace("http://localhost:8081/Homework/FacultyManagement/error.html");
+        }
       }
     });
 
@@ -25,9 +33,19 @@ $(document).ready(function () {
       dataType: "json",
       type: "GET",
       url: "http://localhost:8081/Homework/FacultyManagement/api/groups.php",
+      xhrFields: {
+        withCredentials: true
+      },
       success: function(data) {
         renderGroups(data);
         $('.groupNumbers').click(groupSelectEventHandler);
+      },
+      error: function(jqXhr) {
+        if (jqXhr.status === 401) {
+          window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+        } else {
+          window.location.replace("http://localhost:8081/Homework/FacultyManagement/error.html");
+        }
       }
     });
 
@@ -39,10 +57,19 @@ $(document).ready(function () {
         let grade = $("#gradeAdd").val();
         $("#gradeAdd").val("");
         $.ajax({
-            dataType: "json",
             type: "POST",
             url: "http://localhost:8081/Homework/FacultyManagement/api/grade_add.php",
-            data: {sid: sid, cid: cid, grade: grade}
+            data: {sid: sid, cid: cid, grade: grade},
+            xhrFields: {
+              withCredentials: true
+            },
+            error: function(jqXhr) {
+                if (jqXhr.status === 401) {
+                  window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+                } else {
+                  window.location.replace("http://localhost:8081/Homework/FacultyManagement/error.html");
+                }
+            }
         });
     });
 
@@ -60,8 +87,16 @@ $(document).ready(function () {
     });
 
     $("#logout").click(function() {
-        localStorage.removeItem("userId");
-        window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8081/Homework/FacultyManagement/api/logout.php",
+            xhrFields: {
+              withCredentials: true
+            },
+            success: function() {
+              window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+            }
+        }) 
     });
 
     function fillEmptyRows(row) {
@@ -121,7 +156,10 @@ $(document).ready(function () {
             dataType: "json",
             type: "GET",
             url: "http://localhost:8081/Homework/FacultyManagement/api/students.php",
-            data: {id: teacherId, group: targetName},
+            xhrFields: {
+              withCredentials: true
+            },
+            data: {group: targetName},
             success: function(data) {
                 $("#students").show();
                 $("#goLeft").show();
@@ -131,6 +169,13 @@ $(document).ready(function () {
                 fillEmptyRows(row);
                 students = data;
                 goNext();
+            },
+            error: function(jqXhr) {
+                if (jqXhr.status === 401) {
+                  window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+                } else {
+                  window.location.replace("http://localhost:8081/Homework/FacultyManagement/error.html");
+                }
             }
         })
     }
@@ -147,10 +192,20 @@ $(document).ready(function () {
             dataType: "json",
             type: "GET",
             url: "http://localhost:8081/Homework/FacultyManagement/api/student_grades.php",
+            xhrFields: {
+              withCredentials: true
+            },
             data: {sid: sid, cid: cid},
             success: function(data) {
                 renderGrades(data);
                 $(".updateButton").click(updateEventHandler);
+            },
+            error: function(jqXhr) {
+                if (jqXhr.status === 401) {
+                  window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+                } else {
+                  window.location.replace("http://localhost:8081/Homework/FacultyManagement/error.html");
+                }
             }
         });
     }
@@ -160,10 +215,19 @@ $(document).ready(function () {
         let grade = event.target.parentElement.children[0].value;
         
         $.ajax({
-            dataType: "json",
             type: "POST",
             url: "http://localhost:8081/Homework/FacultyManagement/api/grade_update.php",
-            data: {enrolId: enrolId, grade: grade}
+            xhrFields: {
+              withCredentials: true
+            },
+            data: {enrolId: enrolId, grade: grade},
+            error: function(jqXhr) {
+                if (jqXhr.status === 401) {
+                  window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+                } else {
+                  window.location.replace("http://localhost:8081/Homework/FacultyManagement/error.html");
+                }
+            }
         });
     }
 

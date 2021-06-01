@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { GradesDialogComponent } from '../grades-dialog/grades-dialog.component';
 import { StudentCourse } from '../interfaces/studentCourse';
 import { Teacher } from '../interfaces/teacher';
+import { LoginService } from '../services/login.service';
 import { TeacherService } from '../services/teacher.service';
 
 @Component({
@@ -34,7 +35,7 @@ export class TeacherPageComponent implements OnInit {
     this.dataSource.paginator = paginate;
   }
 
-  constructor(private service: TeacherService, private router: Router, private dialog: MatDialog) { }
+  constructor(private service: TeacherService, private logInService: LoginService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getTeacherDetails();
@@ -48,13 +49,13 @@ export class TeacherPageComponent implements OnInit {
     }
     else { 
       this.selectedGroup = group;
-      this.service.getStudentsFromGroup(parseInt(localStorage.getItem("userId"), 10), this.selectedGroup)
+      this.service.getStudentsFromGroup(this.selectedGroup)
           .subscribe(rez => this.dataSource.data = rez);
     }
   }
 
   getTeacherDetails() : void {
-    this.service.getTeacherDetails(parseInt(localStorage.getItem("userId"), 10))
+    this.service.getTeacherDetails()
         .subscribe(rez => this.teacher = rez);
   }
 
@@ -73,8 +74,8 @@ export class TeacherPageComponent implements OnInit {
   }
 
   logOut() : void {
-    localStorage.removeItem("userId");
-    this.router.navigate(['']);
+    this.logInService.logOut()
+      .subscribe(_ => this.router.navigate(['']));
   }
 
   toggleRow(row) : void {

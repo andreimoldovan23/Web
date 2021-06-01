@@ -1,34 +1,51 @@
-<?php
-header('Access-Control-Allow-Origin: *');
-header('Content-type: application/json');
+<?php require("helper.php");  require("corsConfig.php");
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "facultymanagement";
+configureCors();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+session_start();
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (invalidateSession()) {
+    http_response_code(401);
+} else {
+    renewSession();
 }
 
-$sql = "SELECT DISTINCT s.groupNo from student s";
+if (checkIfTeacher()) {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "facultymanagement";
 
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$stmt->bind_result($group);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-$groups = array();
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-while($stmt->fetch()) {
-    $data = new StdClass();
-    $data->group = $group;
-    array_push($groups, $data);
+    $sql = "SELECT DISTINCT groupNo FROM student s
+    inner join enrolment e on e.student_id = s.id
+    inner join course c on c.id = e.course_id
+    inner join teacher t on t.id = c.teacher_id
+    WHERE t.id = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $_SESSION["id"]);
+    $stmt->execute();
+    $stmt->bind_result($group);
+
+    $groups = array();
+
+    while($stmt->fetch()) {
+        $data = new StdClass();
+        $data->group = $group;
+        array_push($groups, $data);
+    }
+
+    echo json_encode($groups);
+
+    $stmt->close();
+    $conn->close();
+} else {
+    http_response_code(403);
 }
-
-echo json_encode($groups);
-
-$stmt->close();
-$conn->close();
 ?>

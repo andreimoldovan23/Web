@@ -1,16 +1,24 @@
 $(document).ready(function () {
       $("#grades").hide();
-      let studentId = localStorage.getItem("userId");
 
       $.ajax({
         dataType: "json",
         type: "GET",
         url: "http://localhost:8081/Homework/FacultyManagement/api/student.php",
-        data: {id: studentId},
+        xhrFields: {
+          withCredentials: true
+        },
         success: function(data) {
             $("#name").text(data.name);
             $("#mail").text(data.mail);
             $("#group").text(data.groupNo);
+        },
+        error: function(jqXhr) {
+          if (jqXhr.status === 401) {
+            window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+          } else {
+            window.location.replace("http://localhost:8081/Homework/FacultyManagement/error.html");
+          }
         }
       });
 
@@ -18,13 +26,30 @@ $(document).ready(function () {
           dataType: "json",
           type: "GET",
           url: "http://localhost:8081/Homework/FacultyManagement/api/grades.php",
-          data: {id: studentId},
-          success: renderTable
+          xhrFields: {
+            withCredentials: true
+          },
+          success: renderTable,
+          error: function(jqXhr) {
+            if (jqXhr.status === 401) {
+              window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+            } else {
+              window.location.replace("http://localhost:8081/Homework/FacultyManagement/error.html");
+            }
+          }
       })
 
       $("#logout").click(function() {
-          localStorage.removeItem("userId");
-          window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:8081/Homework/FacultyManagement/api/logout.php",
+          xhrFields: {
+            withCredentials: true
+          },
+          success: function() {
+            window.location.replace("http://localhost:8081/Homework/FacultyManagement/login.html");
+          }
+        }) 
       })
 
       function renderTable(data) {

@@ -1,33 +1,46 @@
-<?php
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header("Access-Control-Allow-Methods: PUT");
+<?php require("helper.php");  require("corsConfig.php");
+
+configureCors();
 
 $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
   case 'PUT':
-    $enrolId = $_GET["enrolId"];
-    $grade = $_GET["grade"];
+    session_start();
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "facultymanagement";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if (invalidateSession()) {
+        http_response_code(401);
+    } else {
+        renewSession();
     }
 
-    $sql = "UPDATE enrolment SET grade = ? where id = ?";
+    if (checkIfTeacher()) {
+        $enrolId = $_GET["enrolId"];
+        $grade = $_GET["grade"];
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $grade, $enrolId);
-    $stmt->execute();
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "facultymanagement";
 
-    $stmt->close();
-    $conn->close();
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "UPDATE enrolment SET grade = ? where id = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $grade, $enrolId);
+        $stmt->execute();
+
+        $stmt->close();
+        $conn->close();
+
+        echo json_encode(new StdClass());
+    } else {
+        http_response_code(404);
+    }
     break;
 }
 ?>

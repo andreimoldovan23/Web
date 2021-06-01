@@ -22,14 +22,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit() : void {
       this.service.getLogin(this.loginData)
-          .subscribe(id => {
-              if (id != null) {
-                  localStorage.setItem("userId", id.toString());
-                  this.router.navigate(this.loginData.isTeacher ? ['/teacher'] : ['/student']);
-              } else {
-                  this.router.navigate(['/error']);
-              }
-          })
+          .subscribe(_ => {
+            this.loginData.isTeacher ? this.router.navigate(['/teacher']) : this.router.navigate(['/student']);
+          });
   }
 
 }

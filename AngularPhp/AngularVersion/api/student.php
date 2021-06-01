@@ -1,35 +1,45 @@
-<?php
-header('Access-Control-Allow-Origin: *');
-header('Content-type: application/json');
+<?php require("helper.php");  require("corsConfig.php");
 
-$id = $_GET["id"];
+configureCors();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "facultymanagement";
+session_start();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (invalidateSession()) {
+    http_response_code(401);
+} else {
+    renewSession();
 }
 
-$sql = "SELECT name, mail, groupNo FROM student where id = ?";
+if (checkIfStudent()) {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "facultymanagement";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$stmt->bind_result($studentName, $studentMail, $studentGroup);
-$stmt->fetch();
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-$student = new StdClass();
-$student->name = $studentName;
-$student->mail = $studentMail;
-$student->groupNo = $studentGroup;
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-echo json_encode($student);
+    $sql = "SELECT name, mail, groupNo FROM student where id = ?";
 
-$stmt->close();
-$conn->close();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $_SESSION["id"]);
+    $stmt->execute();
+    $stmt->bind_result($studentName, $studentMail, $studentGroup);
+    $stmt->fetch();
+
+    $student = new StdClass();
+    $student->name = $studentName;
+    $student->mail = $studentMail;
+    $student->groupNo = $studentGroup;
+
+    echo json_encode($student);
+
+    $stmt->close();
+    $conn->close();
+} else {
+    http_response_code(404);
+}
 ?>

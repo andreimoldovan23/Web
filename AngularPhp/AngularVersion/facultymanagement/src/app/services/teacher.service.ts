@@ -20,40 +20,32 @@ export class TeacherService {
 
   constructor(private utils: AbstractService) {}
 
-  getTeacherDetails(id: number) : Observable<Teacher> {
-    const url = `${this.teacherDetailsUrl}?id=${id}`;
-    const errorMessage = `get teacher details w/ id=${id}`;
-    return this.utils.getOneItem<Teacher>(url, errorMessage);
+  getTeacherDetails() : Observable<Teacher> {
+    return this.utils.getOneItem<Teacher>(this.teacherDetailsUrl);
   }
 
   getGroups() : Observable<Group[]> {
-    const url = `${this.groupsUrl}`;
-    const errorMessage = `get groups`;
-    return this.utils.getItems<Group>(url, errorMessage);
+    return this.utils.getItems<Group>(this.groupsUrl);
   }
 
   addGrade(enrolmentDetails: EnrolmentComposite) : Observable<any> {
     const url = `${this.addGradeUrl}?sid=${enrolmentDetails.sid}&cid=${enrolmentDetails.cid}&grade=${enrolmentDetails.grade}`;
-    const errorMessage = `add grade w/ sid=${enrolmentDetails.sid}, cid=${enrolmentDetails.cid}, grade=${enrolmentDetails.grade}`;
-    return this.utils.addItem<EnrolmentComposite>(enrolmentDetails, url, errorMessage);
+    return this.utils.addItem<EnrolmentComposite>(enrolmentDetails, url);
   }
 
   updateGrade(enrolmentDetails: EnrolmentSimple) : Observable<any> {
     const url = `${this.updateGradeUrl}?enrolId=${enrolmentDetails.enrolId}&grade=${enrolmentDetails.grade}`;
-    const errorMessage = `update grade w/ enrolId=${enrolmentDetails.enrolId}, grade=${enrolmentDetails.grade}`;
-    return this.utils.updateItem<EnrolmentSimple>(enrolmentDetails, url, errorMessage);
+    return this.utils.updateItem<EnrolmentSimple>(enrolmentDetails, url);
   }
 
-  getStudentsFromGroup(id: number, group: number) : Observable<StudentCourse[]> {
-    const url = `${this.studentsUrl}?id=${id}&group=${group}`;
-    const errorMessage = `get students from group w/ teacherId=${id}, group=${group}`;
-    return this.utils.getItems<StudentCourse>(url, errorMessage);
+  getStudentsFromGroup(group: number) : Observable<StudentCourse[]> {
+    const url = `${this.studentsUrl}?group=${group}`;
+    return this.utils.getItems<StudentCourse>(url);
   }
 
   getStudentGrades(sid: number, cid: number) : Observable<EnrolmentSimple[]> {
     const url = `${this.studentGradesUrl}?sid=${sid}&cid=${cid}`;
-    const errorMessage = `get grades of student w/ studentId=${sid}, courseId=${cid}`;
-    return this.utils.getItems<EnrolmentSimple>(url, errorMessage);
+    return this.utils.getItems<EnrolmentSimple>(url);
   }
   
 }
